@@ -63,6 +63,10 @@ h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance}
 .hudbtns{display:flex;gap:6px;flex-wrap:wrap}
 .iconbtn{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:7px 11px;font-weight:600;font-size:13px}
 .iconbtn.off{opacity:.55;text-decoration:line-through}
+.vol{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:4px 10px;font-weight:600;font-size:13px}
+.vol input{width:90px;accent-color:var(--crimson)}
+.nowplaying{flex-basis:100%;font-size:11.5px;color:var(--muted);min-height:0}
+.nowplaying:empty{display:none}
 
 .grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:12px;align-items:start}
 @media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
@@ -71,7 +75,7 @@ h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance}
 .shop{position:relative;display:flex;flex-direction:column;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(180deg,var(--paper) 0%,var(--paper2) 100%)}
 .awning{height:22px;background:repeating-linear-gradient(90deg,var(--crimson) 0 30px,var(--gold2) 30px 60px);border-bottom:1px solid var(--line)}
 .street{padding:12px 14px 0;min-height:250px;display:flex;flex-direction:column;gap:8px}
-.street-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 10px;color:var(--muted);font-size:12px}
+.street-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 14px;font-size:24px;line-height:1.2;font-weight:800;font-family:var(--f-display);color:#ff1a1a;text-shadow:0 2px 3px rgba(0,0,0,.75),0 0 1px #000}
 .queue{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:10px;align-items:end;flex:1}
 .empty-q{grid-column:1/-1;align-self:center;text-align:center;color:var(--muted);padding:30px 0}
 
@@ -95,10 +99,7 @@ h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance}
 .pat{width:78%;height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:5px}
 .pat i{display:block;height:100%;background:var(--good);transition:background .3s}
 .cust.mad .pat i{background:var(--bad)}
-.chibi{width:74px;height:84px;display:block}
-.chibi .m-mad,.chibi .brow{display:none}
-.cust.mad .chibi .m-happy{display:none}
-.cust.mad .chibi .m-mad,.cust.mad .chibi .brow{display:inline}
+.chibi{width:84px;height:105px;display:block}
 .cust.mad .chibi{animation:shake .5s infinite}
 .cust.happy .chibi{transform:translateY(-6px)}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
@@ -114,12 +115,18 @@ h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance}
 .cuplabel{font-size:12px;text-align:center;min-height:32px;opacity:.92;line-height:1.35}
 .controls{flex:1;min-width:250px;display:flex;flex-direction:column;gap:9px}
 .row2{display:flex;flex-wrap:wrap;gap:9px 18px}
-.grp h3{font-size:12px;font-family:var(--f-body);font-weight:600;text-transform:uppercase;letter-spacing:.08em;opacity:.8;margin-bottom:5px}
-.btns{display:flex;flex-wrap:wrap;gap:6px}
-.chip{display:inline-flex;align-items:center;gap:6px;border:1.5px solid rgba(255,240,220,.28);background:rgba(255,240,220,.1);color:var(--counter-ink);border-radius:999px;padding:6px 11px 6px 8px;font-weight:600;font-size:13px;transition:background .15s,border-color .15s}
+.controls{gap:10px}
+.row2{gap:10px}
+.grp{background:#fff8ec;border:2px solid var(--gold);border-radius:12px;padding:8px 10px 10px;box-shadow:0 2px 0 rgba(0,0,0,.2)}
+.row2 .grp{flex:1 1 auto}
+.grp h3{font-size:14px;font-family:var(--f-body);font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#9e0b0b;margin-bottom:7px}
+.btns{display:flex;flex-wrap:wrap;gap:9px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1.5px solid #e2c9b0;background:#fff;color:#3b1c19;border-radius:999px;padding:6px 11px 6px 8px;font-weight:600;font-size:13px;transition:background .15s,border-color .15s}
 .chip.plain{padding:6px 11px}
-.chip:hover{background:rgba(255,240,220,.2)}
-.chip.on{background:linear-gradient(180deg,var(--gold2),var(--gold));color:var(--gold-ink);border-color:var(--gold2)}
+.chip:hover{background:#fdeedd}
+.chip.on{background:#9e0b0b;color:#fff;border-color:#5e0505;box-shadow:inset 0 2px 3px rgba(0,0,0,.35)}
+.chip.on:hover{background:#9e0b0b}
+.chip.on .dot{border-color:#fff}
 .chip .dot{width:14px;height:14px;border-radius:50%;border:1.5px solid rgba(0,0,0,.25);flex:none}
 .chip kbd{font-family:var(--f-body);font-size:10px;opacity:.6;border:1px solid currentColor;border-radius:4px;padding:0 4px}
 @media (hover:none){.chip kbd,.kbdhint{display:none}}
@@ -197,8 +204,12 @@ h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance}
     <div class="hudbtns">
       <button class="iconbtn" id="sfxBtn">Âm thanh</button>
       <button class="iconbtn" id="musicBtn">Nhạc</button>
+      <label class="vol" title="Âm lượng nhạc"><span>Âm lượng</span><input type="range" id="volRange" min="0" max="100" step="5" aria-label="Âm lượng nhạc nền"></label>
+      <button class="iconbtn" id="pickMusicBtn">Chọn nhạc của tôi</button>
+      <input type="file" id="musicFile" accept="audio/*" multiple hidden>
       <button class="iconbtn" id="pauseBtn">Tạm dừng</button>
     </div>
+    <div class="nowplaying" id="nowPlaying"></div>
   </header>
 
   <main class="grid">
@@ -301,7 +312,7 @@ function freshState(){return {money:100000,rep:3,day:1,time:0,bases:['truyen','d
 let S=freshState();
 const saved=lsGet(SAVE_KEY,null);
 if(saved&&typeof saved.money==='number'){S=Object.assign(freshState(),saved); S.up=Object.assign(freshState().up,saved.up||{}); if(!S.today) S.today=newToday()}
-let pref=Object.assign({sfx:true,music:true,name:''},lsGet(PREF_KEY,{}));
+let pref=Object.assign({sfx:true,music:true,vol:60,name:''},lsGet(PREF_KEY,{}));
 
 let customers=[],cup=null,spawnT=1.2,paused=false,overlayOpen=false,nextId=1,groupCd=0,over=false;
 const staffT={}; let tab='menu';
@@ -309,12 +320,12 @@ function emptyCup(){return {base:null,tops:[],sugar:null,ice:100,size:'M'}}
 cup=emptyCup();
 
 /* ---------- Âm thanh (Web Audio, tự tổng hợp) ---------- */
-let AC=null, master=null, musicGain=null, musicTimer=null, musicStep=0;
+let AC=null, master=null, musicGain=null;
 function audioInit(){
   if(AC) {if(AC.state==='suspended') AC.resume(); return}
   try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){return}
   master=AC.createGain(); master.gain.value=.5; master.connect(AC.destination);
-  musicGain=AC.createGain(); musicGain.gain.value=.12; musicGain.connect(master);
+  musicGain=AC.createGain(); musicGain.gain.value=.22*((pref.vol==null?60:pref.vol)/100); musicGain.connect(master);
   if(pref.music) startMusic();
 }
 function tone(f,t0,dur,type,vol,dest,f2){
@@ -334,23 +345,58 @@ function sfx(name){
   if(name==='big'){[523,659,784,1047].forEach((f,i)=>tone(f,t+i*.11,.3,'triangle',.18))}
   if(name==='phone'){for(let i=0;i<3;i++){tone(1200,t+i*.16,.08,'square',.07); tone(900,t+i*.16+.08,.08,'square',.07)}}
 }
-// Nhạc nền: vòng ngũ cung nhẹ, 8 nhịp/ô nhịp
-const MEL=[0,2,4,7,9,7,4,2, 0,4,7,9,12,9,7,4, 2,4,7,9,7,4,2,0, 9,7,4,2,4,2,0,-3];
-const BASSN=[0,0,-5,-5,-3,-3,-5,-5];
-function startMusic(){
-  if(!AC||musicTimer) return;
-  const beat=.28; let next=AC.currentTime+.1;
+/* ---------- Nhạc nền ----------
+   Thứ tự ưu tiên: nhạc người chơi tự chọn trên máy > file trong PLAYLIST (nhạc miễn phí bản quyền) > nhạc Tết tự tổng hợp.
+   Thêm bài: chép mp3 vào thư mục music/ rồi khai báo ở PLAYLIST, ghi rõ tác giả và nguồn. */
+const PLAYLIST=[];
+const SYNTH=[ // giai điệu ngũ cung kiểu Tết, tự sáng tác
+  {name:'Xuân về phố',bpm:128,root:293.66,mel:[0,2,4,7,9,7,4,2, 4,7,9,12,9,7,4,7, 9,12,14,12,9,7,9,12, 7,4,2,4,2,0,-3,0],bass:[0,0,-5,-5,-3,-3,-5,0]},
+  {name:'Lì xì đầu năm',bpm:136,root:261.63,mel:[7,9,12,9,7,4,7,9, 12,14,12,9,7,9,7,4, 2,4,7,4,2,0,2,4, 7,4,2,0,-3,0,2,0],bass:[0,0,-3,-3,-5,-5,0,0]},
+  {name:'Chợ hoa ngày Tết',bpm:120,root:329.63,mel:[0,4,7,4,9,7,4,2, 0,2,4,7,4,2,0,-3, 0,4,7,9,12,9,7,4, 2,4,2,0,-3,-5,-3,0],bass:[0,0,-5,-5,-3,-3,-5,-5]}
+];
+let musicTimer=null, musicStep=0, songIdx=0, synthBars=0, userTracks=[], userIdx=0, plIdx=0;
+const bgm=new Audio(); bgm.preload='auto';
+bgm.addEventListener('ended',()=>{if(userTracks.length) userIdx=(userIdx+1)%userTracks.length; else plIdx=(plIdx+1)%Math.max(1,PLAYLIST.length); playFiles()});
+bgm.addEventListener('error',()=>{if(!userTracks.length&&pref.music){PLAYLIST.length=0; startSynth()}});
+const vol=()=>(pref.vol==null?60:pref.vol)/100;
+function applyVol(){bgm.volume=Math.min(1,vol()); if(musicGain) musicGain.gain.value=.22*vol()}
+function nowPlaying(t){const el=$('nowPlaying'); if(el) el.textContent=t?'Đang phát: '+t:''}
+function playFiles(){
+  const list=userTracks.length?userTracks:PLAYLIST; if(!list.length) return false;
+  const tr=userTracks.length?userTracks[userIdx%list.length]:PLAYLIST[plIdx%list.length];
+  if(bgm.getAttribute('src')!==tr.src) bgm.src=tr.src; applyVol();
+  const p=bgm.play(); if(p&&p.catch) p.catch(()=>{});
+  nowPlaying(tr.title+(tr.credit?' · '+tr.credit:'')); return true;
+}
+function noise(t0,dur,vol,hp){
+  const n=Math.floor(AC.sampleRate*dur), buf=AC.createBuffer(1,n,AC.sampleRate), d=buf.getChannelData(0);
+  for(let i=0;i<n;i++) d[i]=(Math.random()*2-1)*(1-i/n);
+  const s=AC.createBufferSource(), f=AC.createBiquadFilter(), g=AC.createGain();
+  f.type='highpass'; f.frequency.value=hp; g.gain.value=vol; s.buffer=buf; s.connect(f); f.connect(g); g.connect(musicGain); s.start(t0);
+}
+function startSynth(){
+  if(!AC||musicTimer) return; applyVol();
+  let next=AC.currentTime+.1;
+  nowPlaying(SYNTH[songIdx].name+' (nhạc tự tổng hợp)');
   musicTimer=setInterval(()=>{
     while(next<AC.currentTime+.5){
-      const i=musicStep%MEL.length;
-      if(i%2===0||Math.random()>.35) tone(523.25*Math.pow(2,MEL[i]/12),next,beat*.9,'triangle',.22,musicGain);
-      if(i%4===0) tone(130.81*Math.pow(2,BASSN[(musicStep/4|0)%8]/12),next,beat*3.6,'sine',.3,musicGain);
+      const song=SYNTH[songIdx], beat=60/song.bpm/2, i=musicStep%song.mel.length;
+      if(i%2===0||Math.random()>.3) tone(song.root*Math.pow(2,song.mel[i]/12),next,beat*.85,'triangle',.22,musicGain);
+      if(i%8===0) tone(song.root*Math.pow(2,(song.mel[i]+12)/12),next,beat*.4,'sine',.08,musicGain); // tiếng chuông
+      if(i%4===0) tone(song.root/2*Math.pow(2,song.bass[(musicStep/4|0)%8]/12),next,beat*3.4,'sine',.3,musicGain);
+      if(i%4===0) tone(110,next,.18,'sine',.5,musicGain,40);           // trống cái
+      if(i%4===2) noise(next,.12,.18,1500);                             // trống con
+      if(i%2===1) noise(next,.04,.06,6000);                             // phách
       musicStep++; next+=beat;
+      if(musicStep%song.mel.length===0&&++synthBars>=6){ // mỗi bài 6 vòng rồi chuyển bài
+        synthBars=0; musicStep=0; songIdx=(songIdx+1)%SYNTH.length; nowPlaying(SYNTH[songIdx].name+' (nhạc tự tổng hợp)');
+      }
     }
   },120);
 }
-function stopMusic(){if(musicTimer){clearInterval(musicTimer); musicTimer=null}}
-function syncSoundBtns(){$('sfxBtn').classList.toggle('off',!pref.sfx); $('musicBtn').classList.toggle('off',!pref.music)}
+function startMusic(){if(!pref.music) return; if(!playFiles()) startSynth()}
+function stopMusic(){if(musicTimer){clearInterval(musicTimer); musicTimer=null} bgm.pause(); nowPlaying('')}
+function syncSoundBtns(){$('sfxBtn').classList.toggle('off',!pref.sfx); $('musicBtn').classList.toggle('off',!pref.music); $('volRange').value=pref.vol==null?60:pref.vol}
 
 /* ---------- Ly trà SVG ---------- */
 function rnd(seed){let s=seed; return ()=>{s=(s*9301+49297)%233280; return s/233280}}
@@ -381,25 +427,64 @@ function cupSVG(o,small){
   return s;
 }
 
-/* ---------- Khách chibi SVG ---------- */
+/* ---------- Khách chibi SVG (anime mắt to, ghép ngẫu nhiên) ---------- */
+const EYE=['#5a3220','#2f5d8a','#3c7a4a','#7a3d8f','#9a5a1e','#2a2a3a','#b3202e'];
+const ACC=['#ff6b8b','#ffd23f','#6ec6ff','#ffffff','#b388ff','#ff8a3d'];
 function chibiSVG(){
-  const skin=pick(SKIN), hair=pick(HAIR), shirt=pick(SHIRT), style=Math.floor(Math.random()*5);
-  let back='', front='';
-  if(style===0){front=`<path d="M14 38 Q14 10 40 10 Q66 10 66 38 Q58 22 40 24 Q22 22 14 38Z" fill="${hair}"/>`}
-  if(style===1){back=`<circle cx="40" cy="8" r="9" fill="${hair}"/>`; front=`<path d="M14 40 Q12 12 40 12 Q68 12 66 40 Q60 24 48 26 Q40 18 30 26 Q20 26 14 40Z" fill="${hair}"/>`}
-  if(style===2){back=`<circle cx="12" cy="40" r="9" fill="${hair}"/><circle cx="68" cy="40" r="9" fill="${hair}"/>`; front=`<path d="M14 38 Q14 10 40 10 Q66 10 66 38 Q54 20 40 26 Q26 20 14 38Z" fill="${hair}"/>`}
-  if(style===3){const cap=pick(['#b3202e','#2d6a4f','#e9b318','#3a6ea5']); front=`<path d="M14 36 Q14 10 40 10 Q66 10 66 36Z" fill="${cap}"/><path d="M40 34 L78 34 Q76 40 62 40 L40 40Z" fill="${cap}"/><circle cx="40" cy="11" r="3" fill="#fff" opacity=".7"/>`}
-  if(style===4){back=`<path d="M12 36 Q8 70 22 74 L58 74 Q72 70 68 36Z" fill="${hair}"/>`; front=`<path d="M14 40 Q12 10 40 10 Q68 10 66 40 Q56 20 40 22 Q24 20 14 40Z" fill="${hair}"/>`}
-  return `<svg class="chibi" viewBox="0 0 80 90" aria-hidden="true">
-    ${back}
-    <path d="M18 90 Q18 66 40 66 Q62 66 62 90Z" fill="${shirt}"/>
-    <circle cx="40" cy="38" r="26" fill="${skin}"/>
+  const skin=pick(SKIN), hair=pick(HAIR), shirt=pick(SHIRT), eye=pick(EYE), acc=pick(ACC);
+  const hs=Math.floor(Math.random()*7), cs=Math.floor(Math.random()*3), ac=Math.floor(Math.random()*7);
+  const uid='h'+Math.random().toString(36).slice(2,8);
+  let back='', front='', extra='';
+  // Tóc phía sau đầu
+  if(hs===1) back=`<path d="M10 46 Q4 86 20 92 L60 92 Q76 86 70 46Z" fill="${hair}"/>`;                    // tóc dài
+  if(hs===2) back=`<path d="M12 40 Q-4 56 4 82 Q10 70 16 54Z M68 40 Q84 56 76 82 Q70 70 64 54Z" fill="${hair}"/>`; // hai bím
+  if(hs===3) back=`<path d="M58 22 Q86 26 78 64 Q72 46 60 38Z" fill="${hair}"/>`;                      // đuôi ngựa
+  if(hs===4) back=`<circle cx="40" cy="8" r="10" fill="${hair}"/>`;                                     // búi
+  if(hs===5) back=`<path d="M10 42 Q8 72 18 74 L62 74 Q72 72 70 42Z" fill="${hair}"/>`;                  // bob
+  // Thân và áo
+  let body=`<path d="M20 100 Q20 74 40 74 Q60 74 60 100Z" fill="${shirt}"/>`;
+  body+=`<ellipse cx="18" cy="90" rx="5" ry="8" fill="${shirt}"/><ellipse cx="62" cy="90" rx="5" ry="8" fill="${shirt}"/><circle cx="18" cy="97" r="4" fill="${skin}"/><circle cx="62" cy="97" r="4" fill="${skin}"/>`;
+  if(cs===0) body+=`<path d="M33 75 L40 84 L47 75" fill="#fff" stroke="rgba(0,0,0,.15)"/>`;                      // cổ áo sơ mi
+  if(cs===1) body+=`<path d="M26 77 L40 88 L54 77 L50 75 L40 82 L30 75Z" fill="#fff"/><path d="M37 86 L40 92 L43 86Z" fill="#b3202e"/>`; // áo thủy thủ
+  if(cs===2) body+=`<path d="M24 80 Q40 70 56 80 Q50 74 40 74 Q30 74 24 80Z" fill="rgba(0,0,0,.18)"/><path d="M37 80 V92 M43 80 V92" stroke="#fff" stroke-width="1.4"/>`; // áo hoodie
+  // Tóc mái phía trước
+  const bangs=[
+    `M10 44 Q8 8 40 8 Q72 8 70 44 Q66 28 56 24 Q54 32 46 30 Q44 22 36 26 Q30 32 22 28 Q14 34 10 44Z`,
+    `M10 46 Q8 8 40 8 Q72 8 70 46 Q64 26 50 24 L46 32 L40 24 L34 32 L30 24 Q16 26 10 46Z`,
+    `M10 44 Q10 6 40 6 Q70 6 70 44 Q62 22 40 26 Q18 22 10 44Z`,
+    `M10 44 Q8 8 40 8 Q72 8 70 44 Q62 30 52 30 Q48 18 40 28 Q30 20 26 30 Q16 30 10 44Z`,
+    `M10 42 Q10 6 40 6 Q70 6 70 42 Q60 24 44 22 Q52 30 46 34 Q38 24 24 26 Q14 30 10 42Z`,
+    `M10 44 Q8 8 40 8 Q72 8 70 44 L64 30 L58 38 L52 26 L44 34 L38 24 L30 34 L24 26 L18 36Z`, // tóc gai
+    `M10 44 Q8 8 40 8 Q72 8 70 44 Q60 30 40 30 Q20 30 10 44Z`
+  ];
+  front=`<path d="${bangs[hs]}" fill="${hair}"/><path d="M22 16 Q34 10 46 13" stroke="#fff" stroke-opacity=".35" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+  if(hs===5) front+=`<path d="M10 44 L12 62 L18 60 L16 40Z M70 44 L68 62 L62 60 L64 40Z" fill="${hair}"/>`;
+  // Phụ kiện
+  if(ac===0) extra=`<path d="M54 14 L64 8 L64 20Z M74 14 L64 8 L64 20Z" fill="${acc}" stroke="rgba(0,0,0,.2)"/><circle cx="64" cy="14" r="2.6" fill="${acc}" stroke="rgba(0,0,0,.25)"/>`; // nơ
+  if(ac===1) extra=`<g transform="translate(18 16)">${[0,72,144,216,288].map(a=>`<ellipse cx="0" cy="-4" rx="3" ry="4.2" fill="${acc}" transform="rotate(${a})"/>`).join('')}<circle r="2.2" fill="#ffd23f"/></g>`; // hoa
+  if(ac===2) extra=`<rect x="52" y="22" width="12" height="4" rx="2" fill="${acc}" transform="rotate(-20 58 24)"/>`; // kẹp tóc
+  if(ac===3) extra=`<g fill="none" stroke="#2a1a14" stroke-width="1.6"><circle cx="27" cy="51" r="10"/><circle cx="53" cy="51" r="10"/><path d="M37 51 H43"/></g>`; // kính
+  if(ac===4) extra=`<path d="M10 46 Q10 10 40 10 Q70 10 70 46" fill="none" stroke="#333" stroke-width="4"/><rect x="4" y="40" width="9" height="15" rx="4" fill="${acc}"/><rect x="67" y="40" width="9" height="15" rx="4" fill="${acc}"/>`; // tai nghe
+  if(ac===5) extra=`<path d="M12 30 Q12 2 40 2 Q68 2 68 30Z" fill="${acc==='#ffffff'?'#3a6ea5':acc}"/><path d="M40 28 L76 28 Q74 34 60 34 L40 34Z" fill="${acc==='#ffffff'?'#3a6ea5':acc}"/>`; // mũ lưỡi trai
+  const eyes=[27,53].map(x=>`<g>
+      <ellipse cx="${x}" cy="51" rx="7.6" ry="9.6" fill="#fff"/>
+      <ellipse cx="${x}" cy="52" rx="6.6" ry="8.6" fill="url(#${uid})"/>
+      <ellipse cx="${x}" cy="53.5" rx="3.2" ry="4.2" fill="#1a0f0c"/>
+      <circle cx="${x+2.4}" cy="47.5" r="2.8" fill="#fff"/><circle cx="${x-2.6}" cy="56.5" r="1.4" fill="#fff" opacity=".9"/>
+      <path d="M${x-8} 47 Q${x-6} 40 ${x} 40.6 Q${x+6} 40 ${x+8} 47" stroke="#1a0f0c" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <path d="M${x-4} 36 Q${x} 34.4 ${x+4} 36" stroke="#5a3a2e" stroke-width="1.3" fill="none" stroke-linecap="round" opacity=".7"/>
+    </g>`).join('');
+  return `<svg class="chibi" viewBox="0 0 80 100" aria-hidden="true">
+    <defs><linearGradient id="${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a0f0c"/><stop offset=".55" stop-color="${eye}"/><stop offset="1" stop-color="#fff" stop-opacity=".9"/></linearGradient></defs>
+    ${back}${body}
+    <rect x="35" y="68" width="10" height="8" fill="${skin}"/>
+    <ellipse cx="40" cy="44" rx="30" ry="28" fill="${skin}"/>
+    <ellipse cx="10" cy="48" rx="3" ry="5" fill="${skin}"/><ellipse cx="70" cy="48" rx="3" ry="5" fill="${skin}"/>
     ${front}
-    <g class="blink" style="transform-origin:40px 44px"><ellipse cx="30" cy="44" rx="3.4" ry="4.4" fill="#2a1a14"/><ellipse cx="50" cy="44" rx="3.4" ry="4.4" fill="#2a1a14"/><circle cx="31.2" cy="42.4" r="1.3" fill="#fff"/><circle cx="51.2" cy="42.4" r="1.3" fill="#fff"/></g>
-    <ellipse cx="24" cy="52" rx="4.5" ry="2.6" fill="#ff8c94" opacity=".55"/><ellipse cx="56" cy="52" rx="4.5" ry="2.6" fill="#ff8c94" opacity=".55"/>
-    <path class="m-happy" d="M35 53 Q40 58 45 53" stroke="#7a2e22" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-    <path class="m-mad" d="M35 57 Q40 52 45 57" stroke="#7a2e22" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-    <path class="brow" d="M25 37 L34 39 M55 37 L46 39" stroke="#2a1a14" stroke-width="2" stroke-linecap="round"/>
+    <g class="blink" style="transform-origin:40px 51px">${eyes}</g>
+    <ellipse cx="20" cy="62" rx="5" ry="2.6" fill="#ff8c94" opacity=".6"/><ellipse cx="60" cy="62" rx="5" ry="2.6" fill="#ff8c94" opacity=".6"/>
+    <path d="M36.5 63.5 Q40 63 43.5 63.5 Q42.6 68 40 68 Q37.4 68 36.5 63.5Z" fill="#c2414f" stroke="#7a2e22" stroke-width="1"/>
+    ${extra}
   </svg>`;
 }
 
@@ -718,6 +803,17 @@ $('resetBtn').onclick=()=>{resetCup(); say('Đã đổ ly, pha lại từ đầu
 $('pauseBtn').onclick=()=>{if(!overlayOpen) setPaused(!paused)};
 $('sfxBtn').onclick=()=>{pref.sfx=!pref.sfx; lsSet(PREF_KEY,pref); syncSoundBtns(); audioInit(); sfx('pick')};
 $('musicBtn').onclick=()=>{pref.music=!pref.music; lsSet(PREF_KEY,pref); syncSoundBtns(); audioInit(); if(pref.music) startMusic(); else stopMusic()};
+$('volRange').oninput=e=>{pref.vol=+e.target.value; applyVol()};
+$('volRange').onchange=()=>lsSet(PREF_KEY,pref);
+$('pickMusicBtn').onclick=()=>$('musicFile').click();
+$('musicFile').onchange=e=>{
+  const files=[...e.target.files]; if(!files.length) return;
+  userTracks.forEach(t=>URL.revokeObjectURL(t.src));
+  userTracks=files.map(f=>({src:URL.createObjectURL(f),title:f.name.replace(/\.[^.]+$/,''),credit:'nhạc của bạn'})); userIdx=0;
+  audioInit(); if(musicTimer){clearInterval(musicTimer); musicTimer=null}
+  pref.music=true; lsSet(PREF_KEY,pref); syncSoundBtns(); playFiles();
+  say(`Đã nạp ${files.length} bài từ máy của bạn. Nhạc chỉ phát trên máy này.`,'good');
+};
 document.querySelector('.tabs').onclick=e=>{const t=e.target.closest('.tab'); if(t){tab=t.dataset.tab; renderPanel()}};
 $('plist').onclick=e=>{const b=e.target.closest('.buy[data-act]'); if(b&&!b.disabled) buy(b.dataset.act,b.dataset.id)};
 let wipeArmed=false;
