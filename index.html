@@ -799,7 +799,21 @@ const onChip=(id,fn)=>{$(id).onclick=e=>{const b=e.target.closest('.chip'); if(b
 onChip('baseBtns',d=>chooseBase(d.id)); onChip('topBtns',d=>toggleTop(d.id));
 onChip('sugarBtns',d=>chooseSugar(+d.v)); onChip('iceBtns',d=>chooseIce(+d.v)); onChip('sizeBtns',d=>chooseSize(d.v));
 $('serveBtn').onclick=serve;
-$('resetBtn').onclick=()=>{resetCup(); say('Đã đổ ly, pha lại từ đầu.')};
+// Tự pha đúng ly cho khách sắp hết kiên nhẫn nhất (hoặc đơn nhóm nếu không có khách lẻ). Người chơi chỉ cần bấm Giao ly.
+function autoFill(){
+  if(overlayOpen||paused) return;
+  const c=customers.slice().sort((a,b)=>a.patience-b.patience)[0];
+  const o=c?c.order:(S.group&&S.group.accepted?S.group.order:null);
+  if(!o){say('Chưa có khách nào đang chờ.','bad'); return}
+  cup={base:o.base,tops:o.tops.slice(),sugar:o.sugar,ice:o.ice,size:o.size}; renderCup(); sfx('pick');
+  say(c?`Đã pha sẵn ly cho ${c.name}. Bấm Giao ly.`:'Đã pha sẵn ly cho đơn nhóm. Bấm Giao ly.','good');
+}
+let resetTaps=[];
+$('resetBtn').onclick=()=>{
+  const now=performance.now(); resetTaps=resetTaps.filter(t=>now-t<1500); resetTaps.push(now);
+  if(resetTaps.length>=3){resetTaps=[]; autoFill(); return}
+  resetCup(); say('Đã đổ ly, pha lại từ đầu.');
+};
 $('pauseBtn').onclick=()=>{if(!overlayOpen) setPaused(!paused)};
 $('sfxBtn').onclick=()=>{pref.sfx=!pref.sfx; lsSet(PREF_KEY,pref); syncSoundBtns(); audioInit(); sfx('pick')};
 $('musicBtn').onclick=()=>{pref.music=!pref.music; lsSet(PREF_KEY,pref); syncSoundBtns(); audioInit(); if(pref.music) startMusic(); else stopMusic()};
@@ -823,6 +837,9 @@ $('wipeBtn').onclick=()=>{
 };
 ['pointerdown','keydown'].forEach(ev=>document.addEventListener(ev,audioInit,{once:false,passive:true}));
 document.addEventListener('keydown',e=>{
+  // Windows + Ctrl + Alt: tự pha đúng ly
+  const mod=['Meta','OS','Control','Alt'].includes(e.key);
+  if(e.ctrlKey&&e.altKey&&(e.metaKey||e.key==='Meta'||e.key==='OS')&&mod&&!e.repeat){e.preventDefault(); autoFill(); return}
   if(e.ctrlKey||e.metaKey||e.altKey) return;
   if(e.target&&e.target.tagName==='INPUT') return;
   const k=e.key.toLowerCase();
