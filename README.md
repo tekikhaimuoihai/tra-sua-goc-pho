@@ -3,7 +3,7 @@
 Game quản lý tiệm trà sữa chạy trên trình duyệt (máy tính và điện thoại).
 
 - Pha đúng ly khách gọi: cốt trà, topping, đường, đá, size M/L.
-- Giá ly 30.000–70.000đ, topping 5.000–20.000đ, size L thêm 10.000đ.
+- Giá ly 30.000–70.000đ, topping 5.000–30.000đ, size L thêm 10.000đ.
 - Đơn đặt nhóm 30–50 ly, giảm 10% khi trên 40 ly.
 - Mở khóa món, thuê nhân viên, nâng cấp quầy.
 - Phá sản khi quỹ âm quá 500.000đ cuối ngày. Đạt 10 triệu để mở chi nhánh 2.

@@ -263,9 +263,9 @@ const TOPS=[
   {id:'tcden',name:'Trân châu đen',price:5000,cost:0,kind:'pearl',color:'#2b1d16',key:'q'},
   {id:'thachdua',name:'Thạch dừa',price:7000,cost:150000,kind:'cube',color:'#f6f3ea',key:'w'},
   {id:'pudding',name:'Pudding trứng',price:10000,cost:400000,kind:'pudding',color:'#f3c84b',key:'e'},
-  {id:'tctrang',name:'Trân châu trắng',price:12000,cost:800000,kind:'pearl',color:'#f7f4ec',key:'r'},
-  {id:'kemmuoi',name:'Kem muối',price:15000,cost:1500000,kind:'foam',color:'#fff4dc',key:'t'},
-  {id:'flan',name:'Flan caramel',price:20000,cost:2500000,kind:'flan',color:'#e9b44c',key:'y'}
+  {id:'tctrang',name:'Trân châu trắng',price:15000,cost:800000,kind:'pearl',color:'#f7f4ec',key:'r'},
+  {id:'kemmuoi',name:'Kem muối',price:20000,cost:1500000,kind:'foam',color:'#fff4dc',key:'t'},
+  {id:'flan',name:'Flan caramel',price:30000,cost:2500000,kind:'flan',color:'#e9b44c',key:'y'}
 ];
 const SUGARS=[{v:30,key:'a'},{v:50,key:'s'},{v:100,key:'d'}];
 const ICES=[{v:0,key:'z'},{v:50,key:'c'},{v:100,key:'v'}];
@@ -551,10 +551,11 @@ function renderPanel(){
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.tab===tab));
   let h='';
   if(tab==='menu'){
+    h+=`<p class="note" style="padding:4px 0 6px">Giá bán là tiền khách trả mỗi ly: cốt trà 30.000–70.000đ, topping thêm 5.000–30.000đ. Nút <b>Mở bán</b> là tiền tiệm bỏ ra một lần để đưa món vào thực đơn (mua nguyên liệu, dụng cụ).</p>`;
     BASES.forEach(b=>{const own=S.bases.includes(b.id);
-      h+=`<div class="item"><span class="sw" style="background:${b.color}"></span><div><h4>${b.name}</h4><p>Cốt trà · bán ${fmt(b.price)}</p></div>${own?'<span class="owned">Đã có</span>':`<button class="buy" data-act="base" data-id="${b.id}">${fmt(b.cost)}</button>`}</div>`});
+      h+=`<div class="item"><span class="sw" style="background:${b.color}"></span><div><h4>${b.name}</h4><p>Giá bán: <b>${fmt(b.price)}</b>/ly</p></div>${own?'<span class="owned">Đã có</span>':`<button class="buy" data-act="base" data-id="${b.id}">Mở bán ${fmt(b.cost)}</button>`}</div>`});
     TOPS.forEach(t=>{const own=S.tops.includes(t.id);
-      h+=`<div class="item"><span class="sw" style="background:${t.color}"></span><div><h4>${t.name}</h4><p>Topping · thêm ${fmt(t.price)}</p></div>${own?'<span class="owned">Đã có</span>':`<button class="buy" data-act="top" data-id="${t.id}">${fmt(t.cost)}</button>`}</div>`});
+      h+=`<div class="item"><span class="sw" style="background:${t.color}"></span><div><h4>${t.name}</h4><p>Giá bán: <b>+${fmt(t.price)}</b>/ly</p></div>${own?'<span class="owned">Đã có</span>':`<button class="buy" data-act="top" data-id="${t.id}">Mở bán ${fmt(t.cost)}</button>`}</div>`});
   } else if(tab==='staff'){
     STAFF.forEach(st=>{const own=S.staff[st.id]; let right, extra='';
       if(!own) right=`<button class="buy" data-act="hire" data-id="${st.id}">Thuê ${fmt(st.hire)}</button>`;
